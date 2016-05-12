@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\User;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Resume;
 
 /**
  * Class DashboardController
@@ -17,7 +18,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('frontend.user.dashboard')
+        $resumes = Resume::all();
+        return view('frontend.user.dashboard', compact('resumes'))
             ->withUser(access()->user());
     }
 }

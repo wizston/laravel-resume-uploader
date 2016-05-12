@@ -14,13 +14,53 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
+                                <a href="#resumes" aria-controls="resumes" role="tab" data-toggle="tab">All Resumes</a>
+                            </li>
+                            <li role="presentation">
                                 <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">{{ trans('navs.frontend.user.my_information') }}</a>
                             </li>
                         </ul>
 
                         <div class="tab-content">
 
-                            <div role="tabpanel" class="tab-pane active" id="profile">
+                            <div class="tab-pane active" role="tabpanel" id="resumes">
+                                <table class="table table-striped table-hover table-bordered dashboard-table">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>Address</th>
+                                        <th>Gender</th>
+                                        <th>State</th>
+                                        <th>Local Govt.</th>
+                                        <th>DOB</th>
+                                        <th>Submitted</th>
+                                        <th>Resume</th>
+                                    </tr>
+                                    @forelse($resumes as $resume)
+                                        <tr>
+                                            <td>{{ $resume->name }}</td>
+                                            <td>{{ $resume->phone }}</td>
+                                            <td>{{ $resume->address }}</td>
+                                            <td>{{ $resume->gender }}</td>
+                                            <td>{{ $resume->state }}</td>
+                                            <td>{{ $resume->local_government }}</td>
+                                            <td>{{ $resume->date_of_birth }}</td>
+                                            <td>{{ $resume->updated_at->diffForHumans() }}</td>
+                                            <td><a href="#">{{ $resume->file }}</a></td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="8">
+                                                <div class="text-center">
+                                                    <h4>No resume has been uploaded yet</h4>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                </table>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="profile">
                                 <table class="table table-striped table-hover table-bordered dashboard-table">
                                     <tr>
                                         <th>{{ trans('labels.frontend.user.profile.avatar') }}</th>
